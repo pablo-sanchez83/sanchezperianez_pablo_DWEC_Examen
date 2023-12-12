@@ -10,8 +10,55 @@
     <h1>Suma de Números Primos</h1>
     <button onclick="calcularSumaPrimos()">Calcular Suma de Números Primos</button>
     <div id="resultados"></div>
+    <script>
+        //Funcion que se ejecuta al pulsar el boton.
+        function calcularSumaPrimos() {
+            /*
+            Creo una variable llamada datos que se almacena como un array.
+            Creo una variable llamada suma primos que se almacena como un integral de valor 0.
+            */
+            let datos = [];
+            let sumaPrimos = 0;
 
-  
+            //Hago un bucle que va desde 1 hasta 15.
+            for (let contador = 1; contador <= 15; contador++) {
+
+                //Creo una variable llamada 'dato' que almacena un valor introducido por el usuario convertido a numero.
+                let dato = parseInt(prompt(`Introduce el numero primo nº ${contador}`));
+
+                //Añado al array datos el valor numerico introducido por el usuario.
+                datos.push(dato);
+            }
+
+            //Recorro los valores almacenado en datos comprobando que pasandolos por la funcion esPrimo() devuelva true, si ese es el caso los suma a la variable sumaPrimos, de no ser así, continua con el bucle
+            datos.forEach(dato => {
+                if (esPrimo(dato)) {
+                    sumaPrimos += dato;
+                }
+            })
+
+            //Almaceno dentro del elemento del HTML con ID 'resultados' el valor de la variable sumaPrimos
+            document.getElementById('resultados').innerHTML = sumaPrimos;
+        }
+
+        //Creo la funcion esPrimo con un parametro de entrada.
+        function esPrimo(numero) {
+
+            //Creo un bucle que va desde 2 hasta el valor del parametro de entrada, no inclusive.
+            for (let contador = 2; contador < numero; contador++) {
+                
+                //Compruebo si el parametro de entrada dividido entre el valor del contador del bucle da de resto cero. 
+                if (numero % contador == 0) {
+
+                    //De ser así, la función acaba devolviendo el valor false.
+                    return false;
+                }
+            }
+
+            //Si acaba el bucle y no ha cumplido en ningun momento la condicion, devolvemos otra comprobacion, en caso de que se cumpla, devolvera true, debido a que el numero no tiene divisores y es mayor a 1 (No es ni uno ni negativo), o false, en caso contratrio.
+            return numero > 1;
+        }
+    </script>
 </body>
 
 </html>
